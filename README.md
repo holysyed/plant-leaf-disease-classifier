@@ -1,6 +1,6 @@
 # Plant Leaf Disease Classifier
 
-A small semester project that classifies leaf photos into the disease classes in a labeled image dataset. It uses transfer learning with MobileNetV2 and includes both a command-line predictor and a Streamlit upload demo.
+A beginner-friendly AI/ML project that classifies plant leaf images into disease categories with transfer learning using MobileNetV2. It includes a training script that learns from labeled image folders, a command-line predictor, and a Streamlit web demo for uploading leaf photos. The project works with PlantVillage or another dataset organized into one folder per class. It is intended for learning and demonstration; predictions are model estimates and may not generalize to real field conditions.
 
 ## 1. Set up the dataset
 
