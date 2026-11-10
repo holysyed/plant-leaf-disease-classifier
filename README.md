@@ -39,7 +39,7 @@ python -m pip install -r requirements.txt
 python train.py --data-dir data/PlantVillage --epochs 10
 ```
 
-The script reserves 20% of the images for validation and writes `artifacts/plant_disease_model.keras` and `artifacts/class_names.json`. The default ImageNet weights are downloaded the first time; use `--weights none` to train without downloading them (this usually needs more data and training).
+The script reserves 20% of the images for validation and writes the model and class labels to `artifacts/`. It also saves per-epoch loss/accuracy in `training_history.json` and final validation loss/accuracy in `validation_metrics.json`, which you can use to report your experiment results. The default ImageNet weights are downloaded the first time; use `--weights none` to train without downloading them (this usually needs more data and training).
 
 ## 4. Make a prediction
 
