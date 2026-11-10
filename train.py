@@ -101,7 +101,7 @@ def main() -> None:
             monitor="val_loss", patience=3, restore_best_weights=True
         )
     ]
-    model.fit(
+    history = model.fit(
         train_ds,
         validation_data=val_ds,
         epochs=args.epochs,
@@ -112,7 +112,28 @@ def main() -> None:
     (args.output_dir / "class_names.json").write_text(
         json.dumps(class_names, indent=2), encoding="utf-8"
     )
-    print(f"Saved model and labels in {args.output_dir.resolve()}")
+
+    training_history = {
+        metric: [float(value) for value in values]
+        for metric, values in history.history.items()
+    }
+    (args.output_dir / "training_history.json").write_text(
+        json.dumps(training_history, indent=2), encoding="utf-8"
+    )
+
+    validation_metrics = {
+        metric: float(value)
+        for metric, value in model.evaluate(val_ds, return_dict=True, verbose=0).items()
+    }
+    (args.output_dir / "validation_metrics.json").write_text(
+        json.dumps(validation_metrics, indent=2), encoding="utf-8"
+    )
+
+    print(f"Saved model and reports in {args.output_dir.resolve()}")
+    print(
+        "Final validation metrics: "
+        + ", ".join(f"{name}={value:.4f}" for name, value in validation_metrics.items())
+    )
 
 
 if __name__ == "__main__":
